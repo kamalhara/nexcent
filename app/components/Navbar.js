@@ -32,7 +32,7 @@ function Navbar() {
           Login
         </Link>
         <Link
-          href="#"
+          href="/signup"
           className="text-xl text-white rounded-md bg-(--green) py-2 px-5  hover:bg-white hover:border-2 hover:border-(--green) hover:text-(--green)"
         >
           Signup
