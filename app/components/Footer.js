@@ -1,115 +1,108 @@
-/* eslint-disable @next/next/no-img-element */
+"use client";
+
 import {
   FaInstagram,
   FaLinkedinIn,
   FaTwitter,
   FaYoutube,
+  FaPaperPlane,
 } from "react-icons/fa";
+import { motion } from "framer-motion";
+import Image from "next/image";
+
 function Footer() {
+  const socialLinks = [
+    { icon: <FaInstagram />, href: "#" },
+    { icon: <FaLinkedinIn />, href: "#" },
+    { icon: <FaTwitter />, href: "#" },
+    { icon: <FaYoutube />, href: "#" },
+  ];
+
+  const footerSections = [
+    {
+      title: "Company",
+      links: ["About us", "Blog", "Contact us", "Pricing", "Testimonials"],
+    },
+    {
+      title: "Support",
+      links: ["Help center", "Terms of service", "Legal", "Privacy policy", "Status"],
+    },
+  ];
+
   return (
-    <footer className="bg-(--footer) text-white py-12 px-6">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 items-start">
-        {/* Left Section */}
-        <div>
-          <a href="#" className="inline-block mb-4">
-            <img src="/nexcent.png" alt="Footer Logo" className="w-32" />
-          </a>
-          <p className="text-sm">Copyright © 2020 Nexcent Ltd.</p>
-          <p className="text-sm mb-4">All rights reserved</p>
+    <footer className="bg-(--footer-bg) text-white pt-24 pb-12 px-6">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 items-start">
+        {/* Brand Section */}
+        <div className="md:col-span-1">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="mb-6 flex items-center gap-2"
+          >
+            <div className="bg-white p-1 rounded-lg">
+               <Image src="/nexcent.png" alt="Nexcent" width={120} height={30} className="object-contain" />
+            </div>
+          </motion.div>
+          
+          <p className="text-gray-400 text-sm mb-6 max-w-xs leading-relaxed">
+            Copyright © 2026 Nexcent Ltd. <br />
+            All rights reserved. Dedicated to making community management seamless.
+          </p>
 
           <div className="flex space-x-4">
-            <a href="#">
-              <FaInstagram />
-            </a>
-            <a href="#">
-              <FaLinkedinIn />
-            </a>
-            <a href="#">
-              <FaTwitter />
-            </a>
-            <a href="#">
-              <FaYoutube />
-            </a>
+            {socialLinks.map((social, i) => (
+              <motion.a
+                key={i}
+                href={social.href}
+                whileHover={{ y: -4, backgroundColor: "#4caf4f" }}
+                className="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center text-lg transition-all"
+              >
+                {social.icon}
+              </motion.a>
+            ))}
           </div>
         </div>
 
-        {/* Middle Section */}
-        <div className="grid grid-cols-2 gap-8">
-          <div>
-            <h4 className="font-semibold mb-3">Company</h4>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <a href="#" className="hover:text-green-400">
-                  About us
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-green-400">
-                  Blog
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-green-400">
-                  Contact us
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-green-400">
-                  Pricing
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-green-400">
-                  Testimonials
-                </a>
-              </li>
+        {/* Links Sections */}
+        {footerSections.map((section, idx) => (
+          <div key={idx}>
+            <h4 className="text-xl font-bold mb-6 text-white">{section.title}</h4>
+            <ul className="space-y-4">
+              {section.links.map((link) => (
+                <li key={link}>
+                  <a
+                    href="#"
+                    className="text-gray-400 hover:text-(--green-primary) transition-colors flex items-center gap-2 group"
+                  >
+                    <span className="w-0 group-hover:w-2 h-0.5 bg-(--green-primary) transition-all" />
+                    {link}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
+        ))}
 
-          <div>
-            <h4 className="font-semibold mb-3">Support</h4>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <a href="#" className="hover:text-green-400">
-                  Help center
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-green-400">
-                  Terms of service
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-green-400">
-                  Legal
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-green-400">
-                  Privacy policy
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-green-400">
-                  Status
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        {/* Right Section */}
+        {/* Subscribe Section */}
         <div>
-          <h4 className="font-semibold mb-3">Stay up to date</h4>
-          <div className="flex items-center bg-gray-700 rounded-lg overflow-hidden">
+          <h4 className="text-xl font-bold mb-6 text-white">Stay up to date</h4>
+          <p className="text-gray-400 text-sm mb-4">Join our newsletter and never miss an update.</p>
+          <div className="relative group">
             <input
               type="email"
               placeholder="Your email address"
-              className="w-full px-3 py-2 bg-transparent text-white outline-none"
+              className="w-full pl-4 pr-12 py-3.5 bg-gray-700/50 border border-gray-600 rounded-xl text-white outline-none focus:border-(--green-primary) focus:bg-gray-700 transition-all"
             />
-            <button className=" px-4 py-2  transition-all">➤</button>
+            <button className="absolute right-2 top-2 bottom-2 aspect-square bg-(--green-primary) text-white rounded-lg flex items-center justify-center hover:bg-(--green-secondary) transition-all transform hover:scale-105 active:scale-95">
+              <FaPaperPlane size={14} />
+            </button>
           </div>
         </div>
+      </div>
+      
+      <div className="max-w-7xl mx-auto border-t border-gray-800 mt-16 pt-8 text-center text-sm text-gray-500">
+        Designed with ❤️ by Nexcent Team
       </div>
     </footer>
   );

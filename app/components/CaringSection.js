@@ -1,80 +1,97 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
-const card = [
+const blogPosts = [
   {
     title: "Creating Streamlined Safeguarding Processes with OneRen",
     image: "/blog1.png",
   },
   {
-    title: "Creating Streamlined Safeguarding Processes with OneRen",
+    title: "What are your responsibilities and how can you manage them?",
     image: "/blog2.png",
   },
   {
-    title: "Creating Streamlined Safeguarding Processes with OneRen",
+    title: "Revamping the Membership Model with Triathlon Australia",
     image: "/blog3.png",
   },
 ];
+
 function CaringSection() {
   return (
-    <section className="text-center py-16 px-4">
-      <div data-aos-delay="100">
-        <h2 className="text-3xl md:text-4xl font-semibold text-gray-700 mb-4">
+    <section className="text-center py-24 px-4 max-w-7xl mx-auto">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+      >
+        <h2 className="text-3xl md:text-5xl font-bold text-gray-800 mb-6">
           Caring is the new marketing
         </h2>
-        <p className="text-gray-500 text-sm md:text-base max-w-2xl mx-auto">
+        <p className="text-gray-500 text-lg md:text-xl max-w-3xl mx-auto mb-16 leading-relaxed">
           The Nexcent blog is the best place to read about the latest membership
-          insights, trends and more. See who&apos;s joining the community, read
-          about how our community are increasing their membership income and
-          lot&apos;s more.
+          insights, trends and more. See who&apos;s joining the community and
+          read about how our partners are increasing their impact.
         </p>
-      </div>
+      </motion.div>
 
-      {/* Blog Cards */}
-      <div className="flex flex-col md:flex-row md:grid-cols-3 gap-8 mt-12">
-        {/* Card 1 */}
-        {card.map((card) => (
-          <div
-            key={card.image}
-            className="bg-white rounded-lg  py-0   transition-all duration-300 relative overflow-hidden"
-            data-aos="fade-up"
-            data-aos-delay="150"
+      {/* Blog Cards Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-24">
+        {blogPosts.map((post, index) => (
+          <motion.div
+            key={post.image}
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: index * 0.2 }}
+            className="relative flex flex-col items-center group"
           >
-            <div className="relative">
+            <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden border border-gray-100 transition-all duration-500">
               <Image
-                src={card.image}
-                alt="Blog 1"
-                width={400}
-                height={250}
-                className="rounded-t-lg w-full h-auto"
+                src={post.image}
+                alt={post.title}
+                fill
+                className="object-cover group-hover:scale-110 transition-transform duration-700"
               />
-              <div className="absolute -bottom-6 left-1/2 transform  hover:opacity-90 transition-all duration-300 -translate-x-1/2 bg-white bg-opacity-20 px-6 py-2 rounded-lg shadow-md">
-                <h3 className="text-gray-500 font-semibold font-mediumtext-sm md:text-base">
-                  {card.title}
-                </h3>
-                <a
-                  href="#"
-                  className="text-[var(--green)] font-medium flex items-center justify-center gap-1 hover:gap-2 transition-all duration-200"
-                >
-                  Read more →
-                </a>
-              </div>
             </div>
-            <div className="p-6 mt-8"></div>
-          </div>
+
+            {/* Overlay Info Card */}
+            <div className="w-[85%] -mt-16 bg-white p-6 rounded-xl border border-gray-100 z-20 transform group-hover:-translate-y-2 transition-transform duration-500">
+              <h3 className="text-gray-700 font-bold text-md md:text-lg mb-4 line-clamp-2">
+                {post.title}
+              </h3>
+              <Link
+                href="#"
+                className="text-(--green-primary) font-bold flex items-center justify-center gap-2 hover:gap-3 transition-all"
+              >
+                Read more
+                <span className="text-xl">→</span>
+              </Link>
+            </div>
+          </motion.div>
         ))}
       </div>
-      <div>
-        <h2 className="text-3xl md:text-6xl font-semibold text-gray-700 md:mx-30 md:my-15 my-10 mt-20">
-          The children are welcome to fringilla free eu.
+
+      {/* Bottom CTA Section */}
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="bg-gray-50 rounded-[3rem] py-20 px-6 mt-12 overflow-hidden relative"
+      >
+        <h2 className="text-3xl md:text-6xl font-black text-gray-800 max-w-4xl mx-auto mb-12 leading-tight">
+          Empower your community with effortless management.
         </h2>
         <Link
           href="#"
-          className="px-4 md:px-8 md:py-4 text-xl py-2 hover:border-2 hover:border-(--green) hover:bg-white hover:text-(--green) bg-(--green) text-white rounded-md transition-all hover:px-9 hover:py-5 duration-300 hover:text-2xl"
+          className="inline-block bg-(--green-primary) text-white text-xl font-bold py-5 px-12 rounded-2xl hover:bg-(--green-secondary) transition-all transform hover:-translate-y-1 active:scale-95"
         >
-          Get Demo
+          Get a Demo →
         </Link>
-      </div>
+      </motion.div>
     </section>
   );
 }

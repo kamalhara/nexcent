@@ -1,55 +1,91 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 function Customer() {
-  return (
-    <div className="flex flex-col md:flex-row items-center justify-between  my-10 gap-10 bg-gray-100 px-10 py-5 md:pr-20 ">
-      {/* Image Section */}
-      <div className=" md:w-1/2 flex justify-center">
-        <Image
-          src="/tesla.png"
-          alt="about"
-          width={300}
-          height={300}
-          className="object-contain"
-        />
-      </div>
+  const clientLogos = [
+    "/client1.svg",
+    "/client2.svg",
+    "/client3.svg",
+    "/client4.svg",
+    "/client5.svg",
+    "/client6.svg",
+  ];
 
-      {/* Text Section */}
-      <div className="md:w-1/2 text-center md:text-left">
-        <p className="text-gray-600 text-sm md:text-base mb-6 font-semibold">
-          Maecenas dignissim justo eget nulla rutrum molestie. Maecenas lobortis
-          sem dui, vel rutrum risus tincidunt ullamcorper. Proin eu enim metus.
-          Vivamus sed libero ornare, tristique quam in, gravida enim. Nullam ut
-          molestie arcu, at hendrerit elit. Morbi laoreet elit at ligula
-          molestie, nec molestie mi blandit. Suspendisse cursus tellus sed augue
-          ultrices, quis tristique nulla sodales. Suspendisse eget lorem eu
-          turpis vestibulum pretium. Suspendisse potenti. Quisque malesuada enim
-          sapien, vitae placerat ante feugiat eget. Quisque vulputate odio
-          neque, eget efficitur libero condimentum id. Curabitur id nibh id sem
-          dignissim finibus ac sit amet magna.
-        </p>
-        <p className="text-(--green) font-bold text-xl mb-10">Tim Smith</p>
-        <p className="text-gray-500 text-sm md:text-base mb-6">
-          British Dragon Boat Racing Association
-        </p>
-        <div className="flex gap-3 flex-col md:flex-row md:gap-10 my-5 items-center">
-          <Image src="/client1.svg" width={40} height={40} alt="clients" />
-          <Image src="/client2.svg" width={40} height={40} alt="clients" />
-          <Image src="/client3.svg" width={40} height={40} alt="clients" />
-          <Image src="/client4.svg" width={40} height={40} alt="clients" />
-          <Image src="/client5.svg" width={40} height={40} alt="clients" />
-          <Image src="/client6.svg" width={40} height={40} alt="clients" />
-          <Link
-            href="#"
-            className="text-(--green) hover:text-green-800 font-bold"
-          >
-            {" "}
-            Meet all customers<span>→</span>
-          </Link>
-        </div>
+  return (
+    <section className="bg-gray-50 py-24 px-6 md:px-28 my-16 rounded-[4rem] mx-4 md:mx-10 overflow-hidden relative">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-16">
+        {/* Image Section */}
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.8 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="md:w-1/3 flex justify-center relative"
+        >
+          <Image
+            src="/tesla.png"
+            alt="Tesla"
+            width={400}
+            height={400}
+            className="object-contain"
+          />
+        </motion.div>
+
+        {/* Text Section */}
+        <motion.div 
+          initial={{ opacity: 0, x: 50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="md:w-2/3"
+        >
+          <p className="text-gray-600 text-lg md:text-xl mb-8 leading-relaxed font-medium italic">
+            &quot;Maecenas dignissim justo eget nulla rutrum molestie. Maecenas lobortis
+            sem dui, vel rutrum risus tincidunt ullamcorper. Proin eu enim metus.
+            Vivamus sed libero ornare, tristique quam in, gravida enim. Nullam ut
+            molestie arcu, at hendrerit elit. Morbi laoreet elit at ligula
+            molestie, nec molestie mi blandit.&quot;
+          </p>
+          
+          <div className="mb-10">
+            <h4 className="text-(--green-primary) font-black text-2xl mb-1">Tim Smith</h4>
+            <p className="text-gray-400 font-semibold tracking-wide uppercase text-sm">
+              British Dragon Boat Racing Association
+            </p>
+          </div>
+
+          <div className="flex flex-wrap gap-8 items-center pt-8 border-t border-gray-100">
+            <div className="flex flex-wrap gap-6 items-center flex-1">
+              {clientLogos.map((logo, index) => (
+                <motion.div
+                  key={index}
+                  whileHover={{ y: -5, opacity: 1 }}
+                  className="opacity-50 grayscale hover:grayscale-0 transition-all"
+                >
+                  <Image src={logo} width={40} height={40} alt="customer logo" />
+                </motion.div>
+              ))}
+            </div>
+            
+            <Link
+              href="#"
+              className="text-(--green-primary) hover:text-(--green-secondary) font-black text-xl flex items-center gap-3 group transition-all"
+            >
+              Meet all customers
+              <motion.span
+                animate={{ x: [0, 5, 0] }}
+                transition={{ repeat: Infinity, duration: 1.5 }}
+              >
+                →
+              </motion.span>
+            </Link>
+          </div>
+        </motion.div>
       </div>
-    </div>
+    </section>
   );
 }
 

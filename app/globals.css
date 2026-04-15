@@ -2,8 +2,14 @@
 @import "tailwindcss";
 
 @theme {
-  --green: #4caf4f;
-  --footer: #263238;
+  --green-primary: #4caf4f;
+  --green-secondary: #388e3c;
+  --green-light: #e8f5e9;
+  --footer-bg: #263238;
+  --text-main: #4d4d4d;
+  --text-secondary: #717171;
+  --glass-bg: rgba(255, 255, 255, 0.8);
+  --glass-border: rgba(255, 255, 255, 0.3);
 }
 
 :root {
@@ -13,6 +19,9 @@
 
 body {
   font-family: var(--font-body);
+  color: var(--text-main);
+  background: #ffffff;
+  overflow-x: hidden;
 }
 
 h1,
@@ -20,4 +29,15 @@ h2,
 h3,
 h4 {
   font-family: var(--font-heading);
+  color: #263238;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+.transition-slow {
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }

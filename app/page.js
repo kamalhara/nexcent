@@ -1,27 +1,25 @@
-import About from "./components/About";
-import CaringSection from "./components/CaringSection";
+import Navbar from "./components/Navbar";
+import Hero from "./components/Hero";
 import Clients from "./components/Clients";
+import About from "./components/About";
 import Customer from "./components/Customer";
+import CaringSection from "./components/CaringSection";
 import Footer from "./components/Footer";
 
-import Hero from "./components/Hero";
-import Navbar from "./components/Navbar";
-function page() {
+export default function Home() {
   return (
-    <>
-      <div className="md:px-28 px-10">
-        <Navbar />
+    <main className="relative min-h-screen bg-white">
+      <Navbar />
+      
+      <div className="flex flex-col gap-0">
         <Hero />
         <Clients />
         <About />
-      </div>
-      <Customer />
-      <div className="md:px-28 px-10">
+        <Customer />
         <CaringSection />
       </div>
+
       <Footer />
-    </>
+    </main>
   );
 }
-
-export default page;
